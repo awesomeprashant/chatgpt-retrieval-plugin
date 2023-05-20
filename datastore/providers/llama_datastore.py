@@ -13,6 +13,14 @@ from llama_index.data_structs.node_v2 import Node, DocumentRelationship, NodeWit
 from llama_index.indices.registry import INDEX_STRUCT_TYPE_TO_INDEX_CLASS
 from llama_index.data_structs.struct_type import IndexStructType
 from llama_index.indices.response.builder import ResponseMode
+from llama_index import SimpleDirectoryReader
+
+
+
+import os
+os.environ["LLAMA_INDEX_TYPE"]="simple_dict"
+os.environ["OPENAI_API_KEY"]="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"
+os.environ["LLAMA_INDEX_JSON_PATH"]="D:\\GITRepos\\chatgpt-retrieval-plugin\\local-server\\data\\"
 
 INDEX_STRUCT_TYPE_STR = os.environ.get('LLAMA_INDEX_TYPE', IndexStructType.SIMPLE_DICT.value)
 INDEX_JSON_PATH = os.environ.get('LLAMA_INDEX_JSON_PATH', None)
@@ -49,7 +57,9 @@ def _create_or_load_index(
     if index_json_path is None:
         return index_cls(nodes=[])  # Create empty index
     else:
-        return index_cls.load_from_disk(index_json_path) # Load index from disk
+        documents = SimpleDirectoryReader(index_json_path).load_data()
+        index = GPTVectorStoreIndex.from_documents(documents)
+        return index # Load index from disk
 
 def _create_or_load_query_kwargs(query_kwargs_json_path: Optional[str] = None) -> Optional[dict]:
     """Create or load query kwargs from json path."""

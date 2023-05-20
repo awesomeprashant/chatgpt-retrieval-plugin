@@ -17,7 +17,7 @@ COLLECTION_NAME = "documents"
 
 
 def ephemeral_chroma_datastore() -> ChromaDataStore:
-    # Initialize an ephemeral in-memory ChromaDB instance
+    # Initalize an ephemeral in-memory ChromaDB instance
     return ChromaDataStore(
         collection_name=COLLECTION_NAME, in_memory=True, persistence_dir=None
     )

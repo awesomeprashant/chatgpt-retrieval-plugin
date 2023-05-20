@@ -18,6 +18,13 @@ from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
 
+import os
+os.environ["DATASTORE"]="llama"
+os.environ["BEARER_TOKEN"]="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.g6Ohqlj6GJyBpfkuA7tt8yaHGXkHedfkoJ7WcgzQwpA"
+os.environ["OPENAI_API_KEY"]="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"
+os.environ["LLAMA_INDEX_TYPE"]="simple_dict"
+os.environ["TMP_FILE_PATH"]="D:\\GITRepos\\chatgpt-retrieval-plugin\\local-server\\tmp\\temp_file"
+
 bearer_scheme = HTTPBearer()
 BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
 assert BEARER_TOKEN is not None
